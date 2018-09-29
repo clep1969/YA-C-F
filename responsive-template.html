@@ -1,0 +1,293 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+	<meta http-equiv="viewport" content="width=device-width, initial-scale=1" />
+	<title>YA(c)F - Yet Another (CSS) Framework - Responsive Grid-Based CSS Framework with Mustache Templating</title>
+	<!--	Web Fonts	-->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet">
+	<!--	link href="https://fonts.googleapis.com/css?family=Anton|Open+Sans:400,400i,700,700i&amp;subset=latin-ext" rel="stylesheet"	-->
+	<!--	End Web Fonts	-->
+	<!--	Reset stylesheet	-->
+	<style type="text/css">
+		*, html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, div	{
+			border: 0;
+			margin: 0;
+			padding: 0;
+			font-size: 100%;
+			line-height: 140%;
+			background-color: white;
+			text-decoration: none;
+		}
+	</style>
+	<!--	End Reset stylesheet	-->
+	<!--	CSS Grid - Definitions	-->
+	<style type="text/css">
+		div#content	{
+			display: grid;
+        	grid-template-columns: repeat(12, 1fr);
+        	/*grid-template-rows: 3em;*/
+			grid-gap: 20px;
+		}
+		#content > div	{	margin-bottom: 0.6em;	}
+		div.column	{
+			border: 1px solid black;
+			padding: 0;
+			margin: 0;
+			text-align: left;
+			vertical-align: top;
+		}
+	</style>
+	<!--	End CSS Grid - Definitions	-->
+	<!--	CSS Grid - Media Queries	-->
+	<style type="text/css">
+		@media only screen and (max-width: 400px)	{
+			div#content	{	grid-template-columns: repeat(2, 1fr);	}
+			div.column	{
+				grid-column: span 1;
+				margin-bottom: 0.6em;
+			}
+			.two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve	{
+				grid-column: 1 / -1 !important;
+			}
+		}
+	</style>
+	<style type="text/css">
+		@media only screen and (min-width: 401px) and (max-width: 500px)	{
+			div#content	{	grid-template-columns: repeat(3, 1fr);	}
+			.two	{	grid-column: span 2;	}
+			.three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve	{
+				grid-column: 1 / -1;
+			}
+		}
+	</style>
+	<style type="text/css">
+		@media only screen and (min-width: 501px) and (max-width: 600px)	{
+			div#content	{	grid-template-columns: repeat(4, 1fr);	}
+			.two	{	grid-column: span 2;	}
+			.three	{	grid-column: span 3;	}
+			.four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve	{
+				grid-column: 1 / -1;
+			}
+		}
+	</style>
+	<style type="text/css">
+		@media only screen and (min-width: 601px) and (max-width: 800px)	{
+			div#content	{	grid-template-columns: repeat(6, 1fr);	}
+			.two	{	grid-column: span 2;	}
+			.three	{	grid-column: span 3;	}
+			.four	{	grid-column: span 4;	}
+			.five	{	grid-column: span 5;	}
+			.six, .seven, .eight, .nine, .ten, .eleven, .twelve	{
+				grid-column: 1 / -1;
+			}
+		}
+	</style>
+	<style type="text/css">
+		@media only screen and (min-width: 801px)	{
+			div#content	{
+				grid-template-columns: repeat(12, 1fr);
+				grid-gap: 1%;
+			}
+			.two	{	grid-column: span 2;	}
+			.three	{	grid-column: span 3;	}
+			.four	{	grid-column: span 4;	}
+			.five	{	grid-column: span 5;	}
+			.six	{	grid-column: span 6;	}
+			.seven	{	grid-column: span 7;	}
+			.eight	{	grid-column: span 8;	}
+			.nine	{	grid-column: span 9;	}
+			.ten	{	grid-column: span 10;	}
+			.eleven	{	grid-column: span 11;	}
+			.twelve	{	grid-column: 1 / -1;	}
+		}
+	</style>
+	<!--	End CSS Grid - Media Queries	-->
+	<!--	Display Styles	-->
+	<style type="text/css">
+		*	{
+			font-family: 'Open Sans', sans-serif;
+		}
+		body	{
+			border: 0;
+			padding: 1em;
+			background-color: white;
+		}
+		h1, h2, h3, h4, h5, h6	{
+			font-family: 'Open Sans Condensed', sans-serif;
+			/*font-family: 'Anton', sans-serif;*/
+			line-height: 110%;
+			padding: 0.55em;
+			padding-left: 0;
+			margin-bottom: 0;
+		}
+		h1	{	font-size: 2em;	}
+		h2	{
+			font-size: 1.8em;
+			line-height: 100%;
+			margin-bottom: 0;
+			padding-bottom: 0.25em;
+			border-bottom: 1px solid #999;
+		}
+		h3	{	font-size: 1.6em;	}
+		h4	{	font-size: 1.4em;	}
+		h5	{	font-size: 1.2em;	}
+		h6	{	font-size: 1em;	}
+		p	{
+			font-size: 0.9em;
+			line-height: 140%;
+			font-weight: 400;
+			margin-bottom: 0.75em;
+		}
+		ul, ol	{
+			padding-left: 1.5em;
+			margin-top: -0.5em;
+			font-size: 0.9em;
+		}
+		/*	Form Styles	*/
+		fieldset	{
+			border: 2px solid rgba(0,0,0,0.4);
+			padding: 0.75em;
+			margin-bottom: 0.5em;
+			background-color: white;
+		}
+		legend	{
+			font-family: 'Open Sans Condensed';
+			font-size: 1em;
+			background-color: white;
+			padding: 0em 1em;
+		}
+		label	{
+			font-size: 0.75em;
+			font-weight: 300;
+		}
+		input[type='text'], input[type='password'], input[type='email'], input[type='tel']	{
+			border-radius: 0.25em;
+			background-color: #ffa;
+			padding: 0.5em;
+			margin: 0.25em 0.5em 0.25em auto;
+			border: 1px solid rgba(0,0,0,0.6);
+			box-shadow: 0.25em;
+			font-size: 0.75em;
+		}
+		select	{
+			/*-moz-appearance: none;*/
+			-webkit-appearance: none;/**/
+			/*appearance: none;*/
+			padding: 0.65em 1em;
+			margin: 0.25em auto;
+			border: 1px solid rgba(0,0,0,0.6);
+			font-size: 0.8em;
+			box-shadow: 2px;
+		}
+		.column	{	background-color: #ddd;	}
+	</style>
+	<!--	End Display Styles	-->
+</head>
+
+<body>
+	<h1>YA(c)F - Yet Another (CSS) Framework</h1>
+	<p>YA(c)F (Yet Another (CSS) Framework) is a flexible, responsive, lightweight CSS framework that gives you everything you need to build robust, scalable websites without a lot of extraneous or confusing markup. This page serves to demonstrate the various features provided by YAF.</p>
+	<ul>
+		<li>CSS Grid provides responsive, pixel-perfect positioning and makes the most demanding layouts easy to render.</li>
+		<li>Theme files in SASS format makes site-wide customization a snap.</li>
+	</ul>
+	<h2>Typography</h2>
+	<h1>Heading 1</h1>
+	<h2>Heading 2</h2>
+	<h3>Heading 3</h3>
+	<h4>Heading 4</h4>
+	<h5>Heading 5</h5>
+	<h6>Heading 6</h6>
+	<p>The quick brown fox jumps over the lazy dog.</p>
+	<p>The <em>quick brown</em> fox <strong>jumps</strong> over the <em>lazy</em> dog.</p>
+	<h2>Form Elements</h2>
+	<form>
+		<fieldset>
+			<legend>Form Items</legend>
+			<label for="textField">Blah blah </label>
+			<input type="text" id="textField" size="10" maxlength="50" placeholder="Put some text in here" />
+			<label for="password">Password </label>
+			<input type="password" id="password" size="10" maxlength="50" />
+			<br />
+			<label for="phoneField">Phone Number </label>
+			<input type="text" id="phoneField" size="10" maxlength="25" placeholder="(555) 555-5555" />
+			<label for="email">E-Mail </label>
+			<input type="email" id="email" size="10" maxlength="50" placeholder="foo@bar.baz" />
+			<br />
+			<label for="selectList">Select List </label>
+			<select name="selectList">
+				<option>--Choose One--</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;
+			<label for="yes">Yes </label>
+			<input type="radio" id="yes" name="choice" />
+			&nbsp;
+			<label for="no">No </label>
+			<input type="radio" id="no" name="choice" />
+			&nbsp;&nbsp;&nbsp;
+			<label for="box1">Box 1 </label>
+			<input type="checkbox" id="box1" name="multiple" />
+			&nbsp;
+			<label for="box2">Box 2 </label>
+			<input type="checkbox" id="box2" name="multiple" checked />
+			&nbsp;&nbsp;&nbsp;
+		</fieldset>
+	</form>
+	<h2>Responsive Grid (CSS Grid Style)</h2>
+	<p>This page serves to demonstrate a responsive grid system in 12- and 16-column flavors. Using CSS grid and media queries, the page reflows and serves screens from 240px wide to full-size desktop resolutions.</p>
+	<p>Unlike my earlier fluid grid, IE 7 and 8 will not be served a separate stylesheet; their current browser share is too small to be catered to. This has been tested and works as expected in all major browsers with 2% or greater market share as of February 2018.</p>
+	<div id="content">
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="column">One</div>
+		<div class="two column">Two</div>
+		<div class="two column">Two</div>
+		<div class="two column">Two</div>
+		<div class="two column">Two</div>
+		<div class="two column">Two</div>
+		<div class="two column">Two</div>
+		<div class="three column">Three</div>
+		<div class="three column">Three</div>
+		<div class="three column">Three</div>
+		<div class="three column">Three</div>
+		<div class="four column">Four</div>
+		<div class="four column">Four</div>
+		<div class="four column">Four</div>
+		<div class="five column">Five</div>
+		<div class="five column">Five</div>
+		<div class="two column">Two</div>
+		<div class="six column">Six</div>
+		<div class="six column">Six</div>
+		<div class="seven column">Seven</div>
+		<div class="five column">Five</div>
+		<div class="eight column">Eight</div>
+		<div class="four column">Four</div>
+		<div class="nine column">Nine</div>
+		<div class="three column">Three</div>
+		<div class="ten column">Ten</div>
+		<div class="two column">Two</div>
+		<div class="eleven column">Eleven</div>
+		<div class="column">One</div>
+		<div class="twelve column">Twelve</div>
+	</div>
+</body>
+
+</html>
